@@ -23,6 +23,8 @@ image = imutils.resize(image, height = 500)
 # in the image
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (5, 5), 0)
+gray = cv2.equalizeHist(gray) # Improve edge contrast
+
 edged = cv2.Canny(gray, 75, 200)
 
 # show the original image and the edge detected image
