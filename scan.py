@@ -36,7 +36,7 @@ cv2.destroyAllWindows()
 # PART 2
 # find the contours in teh Edged image, keep only the
 # largest one, and initialize the screen contour
-cnts = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 cnts = imutils.grab_contours(cnts)
 cnts = sorted(cnts, key = cv2.contourArea, reverse=True)[:5]
 
