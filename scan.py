@@ -21,11 +21,12 @@ image = imutils.resize(image, height = 500)
 
 # convert the image to grayscale, blur it and find edges
 # in the image
+# GRAYSCALE  and BLUR SETTINGS
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (5, 5), 0)
-gray = cv2.equalizeHist(gray) # Improve edge contrast
+# gray = cv2.equalizeHist(gray) # Improve edge contrast
 
-edged = cv2.Canny(gray, 75, 200)
+edged = cv2.Canny(gray, 50, 150) #EDIT-WAS 75, 200
 
 # show the original image and the edge detected image
 print("STEP 1: Edge Detection")
@@ -68,9 +69,17 @@ warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
 
 # Convert the warped image to grayscale then threshold it
 # to give it that "black and whitw" paper effect
-warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-T = threshold_local(warped, 11, offset = 10, method = "gaussian")
-warped = (warped > T).astype("uint8") * 255
+#warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+#warped = cv2.convertScaleAbs(warped, alpha=1.6, beta=1.6) # optional
+#darkened_image = cv2.convertScaleAbs(image, alpha=0.3, beta=0)
+## warped = cv2.threshold(warped, 128, 255, cv2.THRESH_BINARY)  # Global thresholding
+#T = threshold_local(warped, 67, offset = 3, method = "gaussian")
+## Apply morphological operations to clean up the image
+#ernel = np.ones((3, 3), np.uint8)
+#warped = cv2.morphologyEx(warped, cv2.MORPH_CLOSE, kernel)
+
+
+#warped = (warped > T).astype("uint8") * 255
 
 # Show the original and scanned images
 print("STEP 3: Apply perspective transform")
